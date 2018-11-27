@@ -1,4 +1,4 @@
-#include <stddef.h>
+#include "header.h"
 
 __attribute__((visibility("default")))
 void *malloc(size_t __attribute__((unused)) size)
