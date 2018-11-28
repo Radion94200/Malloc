@@ -4,12 +4,6 @@
 #include <stdint.h>
 #include <stddef.h>
 
-/* Def of the Struct which is use for the Malloc */
-struct malloc_data{
-	struct metadata *metadata;
-	void *ptr_memory_zone;
-}
-
 /* Def of the Struct which is use for the Metadata */
 struct metadata{
 	int block_state;
