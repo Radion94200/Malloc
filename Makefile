@@ -17,3 +17,5 @@ check : tests/test.c $@
 
 clean:
 	${RM} ${TARGET_LIB} ${OBJS}
+	${RM} src/*.swp
+	${RM} src/*.o
