@@ -5,6 +5,7 @@ void *new_allocation((struct metadata *init))
 {
 	if (init->size < 4096)
 	{
+		
 	}
 	if (init->size > 4096)
 	{
@@ -13,6 +14,7 @@ void *new_allocation((struct metadata *init))
 	if (new_page == MAP_FAILED)
 		return NULL;
 	struct metadata *new_addr = new_page;
+	init->next = new_addr;
 	}
 }
 
