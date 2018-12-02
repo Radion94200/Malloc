@@ -1,4 +1,5 @@
-#include "header.h"
+#ifndef HEADER_H
+#define HEADER_H
 
 __attribute__((visibility("default")))
 void *malloc(size_t __attribute__((unused)) size)
@@ -24,3 +25,4 @@ void *calloc(size_t __attribute__((unused)) nmemb,
 {
 	return NULL;
 }
+#endif

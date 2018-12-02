@@ -1,4 +1,5 @@
-#include "header.h"
+#ifndef HEADER_H
+#define HEADER_H
 
 /* Function which initialize the mmap */
 void *new_allocation((struct metadata *init))
@@ -32,5 +33,6 @@ void *initialize(void)
 	return addr;
 }
 
-/* Function which split the memory if the size is less than page */
+/* Function which initialize the array of size */
 
+#endif
