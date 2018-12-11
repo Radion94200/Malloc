@@ -25,15 +25,15 @@ void test_strlen()
 }
 
 /* TEST ARRAY SIZE */
-void test_array_size()
+/*void test_array_size()
 {
 	
-}
+}*/
 
 int main()
 {
 	test_strlen();
-	test_array_size();
+	//test_array_size();
 	return 0;
 }
 #endif
