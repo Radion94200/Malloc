@@ -1,7 +1,7 @@
 #ifndef HEADER_H
 #define HEADER_H
 
-/* Function which initialize the mmap */
+/* Function which initialize the malloc on the correct space */
 struct metadata *allocation(size_t newsize, struct metadata *block)
 {
 	if (init_size < (sysconf(SC_PAGESIZE)))
