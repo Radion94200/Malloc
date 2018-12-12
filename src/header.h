@@ -1,14 +1,18 @@
+#ifndef HEADER_H
+#define HEADER_H
+#define _GNU_SOURCE
 #include <string.h>
 #include <sys/mman.h>
 #include <pthread.h>
 #include <stdint.h>
 #include <stddef.h>
+#include <unistd.h>
 
 /* Def of the Struct which is use for the Metadata */
 struct metadata{
 	int block_state;
-	int block_size;
-	struct metadata *next_block;
+	size_t block_size;
+	struct metadata *next;
 };
 
 /* Def of the funcs in the malloc.c */
@@ -23,11 +27,10 @@ void *calloc(size_t __attribute__((unused)) nmemb,
              size_t __attribute__((unused)) size);
 
 /* Def of the init_struct */
-struct metadata *allocation((struct metadata *init));
+struct metadata *allocation(size_t newsize, struct metadata *init);
 
 struct metadata *initialize(void);
 
-int check_space();
+struct metadata *check_space(size_t newsize, struct metadata *block);
 
-/* Def of the useful_func */
-unsigned mystrlen(char *string);
+#endif /* HEADER_H */

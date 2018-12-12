@@ -1,15 +1,19 @@
-#ifndef HEADER_H
-#define HEADER_H
+#include "header.h"
+
+static struct metadata *meta;
 
 __attribute__((visibility("default")))
 void *malloc(size_t __attribute__((unused)) size)
 {
-	return NULL;
+	meta = initialize();
+	check_space(size ,meta);
+	return allocation(size ,meta); 
 }
 
 __attribute__((visibility("default")))
 void free(void __attribute__((unused)) *ptr)
 {
+	
 }
 
 __attribute__((visibility("default")))
@@ -25,4 +29,3 @@ void *calloc(size_t __attribute__((unused)) nmemb,
 {
 	return NULL;
 }
-#endif

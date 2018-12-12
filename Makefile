@@ -1,11 +1,11 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -pedantic -std=c99 -fPIC\
+CFLAGS = -g -Wall -Wextra -Werror -pedantic -std=c99 -fPIC\
          -fvisibility=hidden -fno-builtin
 LDFLAGS = -shared
 TARGET_LIB = libmalloc.so
-OBJS = src/malloc.o
+OBJS = src/malloc.o src/init_struct.o
 PFLAGS = -Wall -Wextra -Werror -pedantic -std=c99
-SRCS = src/useful_func.c tests/test.c
+SRCS = tests/test.c
 OBJ = ${SRCS:.c=.o}
 
 .PHONY: all ${TARGET_LIB} clean make
