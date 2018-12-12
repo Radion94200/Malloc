@@ -1,1 +1,14 @@
 This is the README associated to the malloc project.
+
+First of all, we juste have a basic (first fit) malloc.
+Its totally transparent for the user.
+Associated Makefile was update to allow it.
+
+Then all the other functions which are used by malloc are implemented.
+	Calloc 
+	Free
+	Realloc
+
+For each one there is a testsuite to test them on real func with our dynmic 
+library.
+

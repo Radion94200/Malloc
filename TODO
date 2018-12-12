@@ -1,1 +1,12 @@
 This is the TODO list associated to the malloc subject
+
+First step was to create the struct of the malloc.
+Then we need to create the malloc and the associated testsuite.
+
+Then i do the free func to liberate the mem precedently allocated
+For the beginning the easier way and then more complicated.
+
+Then must do the calloc func which is use for put all cases at 0.
+I must use memset to use it.
+
+Then for the final i'll do realloc.

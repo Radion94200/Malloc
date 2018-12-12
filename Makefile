@@ -15,8 +15,8 @@ ${TARGET_LIB}: ${OBJS}
 
 all: ${TARGET_LIB}
 
-check : ${OBJ}
-		${CC} -o test ${OBJ} ${PFLAGS}
+check : tests/test.sh
+	tests/test.sh | column -t
 
 clean:
 	${RM} ${TARGET_LIB} ${OBJS}
@@ -26,3 +26,5 @@ clean:
 	${RM} src/.*.swo
 	${RM} .*.swp
 	${RM} tests/*.o
+	${RM} test
+	${RM} *.txt
