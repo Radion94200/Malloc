@@ -1,5 +1,22 @@
 #include "header.h"
 
+/*Function which split allcation for CS */
+struct metadata *split_allocation(size_t newsize, struct metadata *block)
+{
+	struct metadata *oldnext = block->next;
+	size_t sizetmp = block->block_size;
+	block->block_state = 1;
+	block->block_size =  newsize;
+	block->next = (struct metadata *)(((char *)block) + newsize + 
+		sizeof(struct metadata));
+	struct metadata *newdata = block->next;
+	newdata->block_state = 0;
+	newdata->block_size = sizetmp - (sizeof(struct metadata) + 
+		newsize);
+	newdata->next = oldnext;
+	return block;
+}
+
 /* Function which initialize the malloc on the correct space */
 struct metadata *allocation(size_t newsize, struct metadata *block)
 {
@@ -7,18 +24,7 @@ struct metadata *allocation(size_t newsize, struct metadata *block)
 	{
 		if (check_space(newsize, block) != NULL)
 		{
-			struct metadata *oldnext = block->next;
-			size_t sizetmp = block->block_size;
-			block->block_state = 1;
-			block->block_size =  newsize;
-			block->next = (struct metadata *)(((char *)block) + newsize + 
-				sizeof(struct metadata));
-			struct metadata *newdata = block->next;
-			newdata->block_state = 0;
-			newdata->block_size = sizetmp - (sizeof(struct metadata) + 
-				newsize);
-			newdata->next = oldnext;
-			return block;
+			return split_allocation(newsize, block);
 		}
 		else
 		{

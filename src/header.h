@@ -33,4 +33,5 @@ struct metadata *initialize(void);
 
 struct metadata *check_space(size_t newsize, struct metadata *block);
 
+struct metadata *split_allocation(size_t newsize, struct metadata *block);
 #endif /* HEADER_H */
