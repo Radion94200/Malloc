@@ -14,7 +14,7 @@ struct metadata *split_allocation(size_t newsize, struct metadata *block)
 	newdata->block_size = sizetmp - (sizeof(struct metadata) + 
 		newsize);
 	newdata->next = oldnext;
-	return block;
+	return block + 1;
 }
 
 /* Function which initialize the malloc on the correct space */
@@ -22,28 +22,30 @@ struct metadata *allocation(size_t newsize, struct metadata *block)
 {
 	if (newsize < (sysconf(_SC_PAGESIZE) - sizeof(struct metadata)))
 	{
-		if (check_space(newsize, block) != NULL)
+		struct metadata * tpm = check_space(newsize, block);
+		if (tpm != NULL)
 		{
-			return split_allocation(newsize, block);
+			return split_allocation(newsize, tpm);
 		}
 		else
 		{
 			struct metadata *tmp = initialize();
-			while (block->next != NULL)
-				block = block->next;
-			block->next = tmp;
+			while (tpm->next != NULL)
+				tpm = tpm->next;
+			tpm->next = tmp;
 			allocation(newsize, tmp);
 		}
 	}
 	else
 	{
-		void *new_page = mmap(NULL, sysconf(_SC_PAGESIZE), 
+		size_t length = newsize / sysconf(_SC_PAGESIZE) + 1;
+		void *new_page = mmap(NULL, sysconf(_SC_PAGESIZE) * length, 
 			PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
 		if (new_page == MAP_FAILED)
 			return NULL;
 		struct metadata *new_addr = new_page;
 		block->next = new_addr;
-		return new_addr;
+		return new_addr + 1;
 	}
 	return 0;
 }

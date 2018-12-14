@@ -1,11 +1,9 @@
 CC = gcc
-CFLAGS = -g -Wall -Wextra -Werror -pedantic -std=c99 -fPIC\
+CFLAGS = -Wall -Wextra -Werror -pedantic -std=c99 -fPIC\
          -fvisibility=hidden -fno-builtin
 LDFLAGS = -shared
 TARGET_LIB = libmalloc.so
 OBJS = src/malloc.o src/init_struct.o
-PFLAGS = -Wall -Wextra -Werror -pedantic -std=c99
-SRCS = tests/test.c
 OBJ = ${SRCS:.c=.o}
 
 .PHONY: all ${TARGET_LIB} clean make
@@ -15,7 +13,7 @@ ${TARGET_LIB}: ${OBJS}
 
 all: ${TARGET_LIB}
 
-check : tests/test.sh
+check : ${TARGET_LIB}
 	tests/test.sh | column -t
 
 clean:
