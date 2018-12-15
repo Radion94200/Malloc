@@ -26,3 +26,4 @@ clean:
 	${RM} tests/*.o
 	${RM} test
 	${RM} *.txt
+	${RM} *.tar
