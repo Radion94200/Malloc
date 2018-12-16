@@ -7,13 +7,16 @@ struct metadata *split_allocation(size_t newsize, struct metadata *block)
 	size_t sizetmp = block->block_size;
 	block->block_state = 1;
 	block->block_size =  newsize;
-	block->next = (struct metadata *)(((char *)block) + newsize + 
-		sizeof(struct metadata));
-	struct metadata *newdata = block->next;
-	newdata->block_state = 0;
-	newdata->block_size = sizetmp - (sizeof(struct metadata) + 
-		newsize);
-	newdata->next = oldnext;
+    if (sizetmp - newsize > (sizeof(struct metadata) + 16))
+    {
+	    block->next = (struct metadata *)(((char *)block) + newsize + 
+		    sizeof(struct metadata));
+	    struct metadata *newdata = block->next;
+	    newdata->block_state = 0;
+	    newdata->block_size = sizetmp - (sizeof(struct metadata) + 
+		    newsize);
+	    newdata->next = oldnext;
+    }
 	return block + 1;
 }
 

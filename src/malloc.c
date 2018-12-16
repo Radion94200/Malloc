@@ -5,12 +5,14 @@ static struct metadata *meta = NULL;
 __attribute__((visibility("default")))
 void *malloc(size_t __attribute__((unused)) size)
 {
-	//if (meta == NULL)
+	if (meta == NULL)
 		meta = initialize();
-	//check_space(size, meta);
-	//if (check_space(size, meta) == NULL)
-	//	initialize();
-	return allocation(size ,meta); 
+	if (check_space(size, meta) == NULL)
+    {
+        struct metadata *toto = initialize();
+        return allocation(size, toto);
+    }
+    return allocation(size, meta);
 }
 
 __attribute__((visibility("default")))
@@ -27,7 +29,17 @@ __attribute__((visibility("default")))
 void *realloc(void __attribute__((unused)) *ptr,
              size_t __attribute__((unused)) size)
 {
-	return malloc(size);
+	if (size == 0)
+        free(ptr);
+    if (ptr == NULL)
+        return malloc(size);
+    else
+    {
+        void * tata= malloc(size);
+        memcpy(tata, ptr, size);
+        return tata;
+    }
+    return 0;
 }
 
 __attribute__((visibility("default")))
