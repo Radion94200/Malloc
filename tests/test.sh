@@ -3,6 +3,7 @@
 RED=`tput setaf 1`
 GREEN=`tput setaf 2`
 YELLOW=`tput setaf 3`
+BLACK=`tput sgr0`
 
 echo "${YELLOW}TEST FOR MALLOC"
 
@@ -152,3 +153,5 @@ if [ "$DIFF" != "" ] ; then
 else
 	echo "${GREEN}TEST $num: TEST CLANG OK"
 fi
+
+echo ${BLACK}
