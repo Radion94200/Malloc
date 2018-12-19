@@ -9,10 +9,11 @@
 #include <unistd.h>
 
 /* Def of the Struct which is use for the Metadata */
-struct metadata{
-	int block_state;
-	size_t block_size;
-	struct metadata *next;
+struct metadata
+{
+    int block_state;
+    size_t block_size;
+    struct metadata *next;
 };
 
 /* Def of the funcs in the malloc.c */
